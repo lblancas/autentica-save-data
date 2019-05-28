@@ -1,0 +1,62 @@
+server:
+  port: 8080
+
+spring:
+  jackson:
+    mapper:
+      DEFAULT_VIEW_INCLUSION: true 
+    serialization: 
+      indent_output: true
+      WRITE_DATES_AS_TIMESTAMPS: false
+    deserialization:
+      FAIL_ON_IGNORED_PROPERTIES: false
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+      ACCEPT_SINGLE_VALUE_AS_ARRAY: true
+    default-property-inclusion: non_empty 
+  datasource:
+    url: jdbc:postgresql://ec2-54-221-231-167.compute-1.amazonaws.com:5432/dbv5rnsmin4ilf?sslmode=require
+    username: rryqsgyofdycle
+    password: 928bdee4d2b638f5b9acafd36a6cbc0fb702c87876b7be749dc788cae87db670
+#    url: jdbc:postgresql://localhost:5432/postgres
+#    username: postgres
+#    password: postgres
+    cachePrepStmts: true
+    prepStmtCacheSize: 250
+    prepStmtCacheSqlLimit: 2048
+    useServerPrepStmts: true
+
+    hikari:
+      pool-name: pooloauth2
+      idleTimeout: 20000
+      maxLifetime: 20000
+      connection-timeout: 20000
+      driver-class-name: org.postgresql.Driver
+      jdbc-url: jdbc:postgresql://ec2-54-221-231-167.compute-1.amazonaws.com:5432/dbv5rnsmin4ilf?sslmode=require
+      username:  rryqsgyofdycle
+      password: 928bdee4d2b638f5b9acafd36a6cbc0fb702c87876b7be749dc788cae87db670
+#      jdbc-url: jdbc:postgresql://localhost:5432/postgres
+#      username:  postgres
+#      password: postgres
+      maximum-pool-size: 4
+      minimum-idle: 1
+  jpa:
+    openInView: false
+    show_sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      # fixes Caused by: java.sql.SQLFeatureNotSupportedException: Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
+      hibernate.jdbc.lob.non_contextual_creation: true
+
+  data:
+    jpa:
+      repositories.enabled: true
+
+logging:
+  level:
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+    com.example: DEBUG
+  file: app.log
+  

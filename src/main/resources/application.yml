@@ -1,0 +1,53 @@
+server:
+  port: 8081
+spring:
+  jackson:
+    mapper:
+      DEFAULT_VIEW_INCLUSION: true 
+    serialization: 
+      indent_output: true
+      WRITE_DATES_AS_TIMESTAMPS: false
+    deserialization:
+      FAIL_ON_IGNORED_PROPERTIES: false
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+      ACCEPT_SINGLE_VALUE_AS_ARRAY: true
+    default-property-inclusion: non_empty 
+  datasource:
+    url: jdbc:postgresql://ec2-54-83-61-142.compute-1.amazonaws.com:5432/daj4lm4algbagd?sslmode=require
+    username: okuolnaiizcluf
+    password: 5b9c8448921780a308c41134ac7c6dec7ee10dfd3915caf347717b587f64e9b1
+    cachePrepStmts: true
+    prepStmtCacheSize: 250
+    prepStmtCacheSqlLimit: 2048
+    useServerPrepStmts: true
+    hikari:
+      pool-name: pooloauth2
+      idleTimeout: 20000
+      maxLifetime: 20000
+      connection-timeout: 20000
+      driver-class-name: org.postgresql.Driver
+      jdbc-url: jdbc:postgresql://ec2-54-83-61-142.compute-1.amazonaws.com:5432/daj4lm4algbagd?sslmode=require
+      username:  okuolnaiizcluf
+      password: 5b9c8448921780a308c41134ac7c6dec7ee10dfd3915caf347717b587f64e9b1
+      maximum-pool-size: 4
+      minimum-idle: 1
+  jpa:
+    openInView: false
+    show_sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      # fixes Caused by: java.sql.SQLFeatureNotSupportedException: Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
+      hibernate.jdbc.lob.non_contextual_creation: true
+  data:
+    jpa:
+      repositories.enabled: true
+
+logging:
+  level:
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+    com.example: DEBUG
+  file: app.log
+  
